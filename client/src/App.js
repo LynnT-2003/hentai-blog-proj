@@ -15,9 +15,8 @@ function App() {
             <div className="post">
               <div className="image">
                 <img
-                  src="https://pbs.twimg.com/media/Fq5atUwaUAAnKEe.jpg"
+                  src="https://github.com/LynnT-2003/hentai-blog-proj/blob/main/images/oshinoko.png?raw=true"
                   alt=""
-                  style={{ width: "723px", height: "576px" }}
                 />
               </div>
               <div className="texts">
