@@ -6,6 +6,9 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 
+const bcrypt = require("bcryptjs");
+const salt = bcrypt.genSaltSync(10);
+
 app.use(cors());
 app.use(express.json());
 
@@ -22,8 +25,11 @@ app.get("/test", (req, res) => {
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
   try {
-    const userDoc = await User.create({ username, password });
-    // res.json({ requestData: { username, password } });
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const userDoc = await User.create({
+      username,
+      password: hashedPassword,
+    });
     res.json(userDoc);
   } catch (e) {
     res.status(400).json(e);
