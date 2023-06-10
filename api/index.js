@@ -11,7 +11,7 @@ const salt = bcrypt.genSaltSync(10);
 const secret = "wyabfdsabcaukdhwiaasdcjhcjhcjhcw";
 const jwt = require("jsonwebtoken");
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 
 const User = require("./models/User");
@@ -41,16 +41,20 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const userDoc = await User.findOne({ username });
-  const passOk = bcrypt.compareSync(password, userDoc.password);
-  if (passOk) {
-    // logged in successfully
-    jwt.sign({ username, id: userDoc.id }, secret, {}, (err, token) => {
-      if (err) throw err;
-      res.cookie("token", token).json("ok");
-    });
-    // res.json();
+
+  if (userDoc) {
+    const passOk = bcrypt.compareSync(password, userDoc.password);
+
+    if (passOk) {
+      jwt.sign({ username, id: userDoc.id }, secret, {}, (err, token) => {
+        if (err) throw err;
+        res.cookie("token", token).json("ok");
+      });
+    } else {
+      res.status(400).json("Wrong credentials");
+    }
   } else {
-    res.status(400).json("wrong credentials");
+    res.status(400).json("User not found"); // shouldn't reach this point (I think)
   }
 });
 
