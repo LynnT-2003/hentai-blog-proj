@@ -36,6 +36,13 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  const userDoc = await User.findOne({ username });
+  const passOk = bcrypt.compareSync(password, userDoc.password);
+  res.json(passOk);
+});
+
 console.log("Server is up and running at", process.env.API_PORT);
 app.listen(process.env.API_PORT);
 
