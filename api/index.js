@@ -11,8 +11,11 @@ const salt = bcrypt.genSaltSync(10);
 const secret = "wyabfdsabcaukdhwiaasdcjhcjhcjhcw";
 const jwt = require("jsonwebtoken");
 
+const cookieParser = require("cookie-parser");
+
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
+app.use(cookieParser());
 
 const User = require("./models/User");
 
@@ -56,6 +59,14 @@ app.post("/login", async (req, res) => {
   } else {
     res.status(400).json("User not found"); // shouldn't reach this point (I think)
   }
+});
+
+app.get("/profile", (req, res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, secret, {}, (err, info) => {
+    if (err) throw err;
+    res.json(info);
+  });
 });
 
 console.log("Server is up and running at", process.env.API_PORT);
