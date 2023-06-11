@@ -1,7 +1,28 @@
-export default function Post() {
+import { formatISO9075 } from "date-fns";
+
+export default function Post({ title, post, summary, cover, createdAt }) {
   return (
     <>
       <div className="post">
+        <div className="image">
+          <img
+            src="https://otakukart.com/wp-content/uploads/2022/07/Sagiri-723x576.jpg"
+            alt=""
+            style={{ maxHeight: "550px" }}
+          />
+        </div>
+        <div className="texts">
+          <h2>{title}</h2>
+          <p className="info">
+            <a href="author" className="author">
+              Lynn Thit
+            </a>
+            <time>{formatISO9075(new Date(createdAt))}</time>
+          </p>
+          <p className="summary">{summary}</p>
+        </div>
+      </div>
+      {/* <div className="post">
         <div className="image">
           <img
             src="https://otakukart.com/wp-content/uploads/2022/07/Sagiri-723x576.jpg"
@@ -23,8 +44,8 @@ export default function Post() {
             her confident stance exudes irresistible allure.
           </p>
         </div>
-      </div>
-      <div className="post">
+      </div> */}
+      {/* <div className="post">
         <div className="image">
           <img
             src="https://github.com/LynnT-2003/hentai-blog-proj/blob/main/images/oshinoko.png?raw=true"
@@ -67,7 +88,7 @@ export default function Post() {
             This is how I actually survived reading 177013
           </p>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
