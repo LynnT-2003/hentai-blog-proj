@@ -1,12 +1,19 @@
 import { formatISO9075 } from "date-fns";
 
-export default function Post({ title, post, summary, cover, createdAt }) {
+export default function Post({
+  title,
+  post,
+  summary,
+  cover,
+  createdAt,
+  author,
+}) {
   return (
     <>
       <div className="post">
         <div className="image">
           <img
-            src="https://otakukart.com/wp-content/uploads/2022/07/Sagiri-723x576.jpg"
+            src={"http://localhost:4000/" + cover}
             alt=""
             style={{ maxHeight: "550px" }}
           />
@@ -15,7 +22,7 @@ export default function Post({ title, post, summary, cover, createdAt }) {
           <h2>{title}</h2>
           <p className="info">
             <a href="author" className="author">
-              Lynn Thit
+              {author.username}
             </a>
             <time>{formatISO9075(new Date(createdAt))}</time>
           </p>

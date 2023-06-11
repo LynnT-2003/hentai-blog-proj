@@ -16,6 +16,7 @@ const cookieParser = require("cookie-parser");
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(cookieParser());
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 const multer = require("multer");
 const uploadMiddleware = multer({ dest: "uploads/" });
@@ -105,7 +106,10 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
 });
 
 app.get("/post", async (req, res) => {
-  res.json(await Post.find());
+  res.json(
+    await Post.find().populate("author", ["username"]).sort({ createdAt: -1 })
+    // .limit(20) // limit to latest 20 posts
+  );
 });
 
 console.log("Server is up and running at", process.env.API_PORT);
