@@ -1,4 +1,5 @@
 import { formatISO9075 } from "date-fns";
+import { Link } from "react-router-dom";
 
 export default function Post({
   title,
@@ -12,11 +13,18 @@ export default function Post({
     <>
       <div className="post">
         <div className="image">
-          <img
-            src={"http://localhost:4000/" + cover}
-            alt=""
-            style={{ maxHeight: "550px" }}
-          />
+          <Link to={"/post/id"}>
+            <img
+              src={"http://localhost:4000/" + cover}
+              alt=""
+              style={{
+                width: "500px",
+                height: "300px",
+                objectFit: "cover",
+                objectPosition: "center",
+              }}
+            />
+          </Link>
         </div>
         <div className="texts">
           <h2>{title}</h2>
