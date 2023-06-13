@@ -71,16 +71,21 @@ export default function CreatePost() {
       />
       <input
         type="summary"
-        placeholder={"Summary"}
+        placeholder={"Short description"}
         value={summary}
         onChange={(ev) => setSummary(ev.target.value)}
       />
       <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
+      <p style={{ fontSize: "0.7em", marginTop: "0px" }}>
+        Note: Upload a picture for your article here. We recommend a high
+        resolution image with a 1:1 ratio of either .jpeg .png or .webp format.
+      </p>
       <ReactQuill
         value={content}
         onChange={(newValue) => setContent(newValue)}
         modules={modules}
         formats={formats}
+        placeholder="Start writing out your full article here..."
       />
       <button style={{ marginTop: "5px" }}>Create Post</button>
     </form>

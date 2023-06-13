@@ -112,6 +112,12 @@ app.get("/post", async (req, res) => {
   );
 });
 
+app.get("/post/:id", async (req, res) => {
+  const { id } = req.params;
+  const postDoc = await Post.findById(id).populate("author", ["username"]);
+  res.json(postDoc);
+});
+
 console.log("Server is up and running at", process.env.API_PORT);
 app.listen(process.env.API_PORT);
 

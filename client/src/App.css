@@ -138,7 +138,7 @@ div.content p{
   margin: 30px 0;
 }
 div.content li{
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 div.edit-row{
   text-align: center;
@@ -154,6 +154,7 @@ div.post-page a.edit-btn{
   border-radius: 5px;
   text-decoration: none;
 }
+
 a svg{
   height:20px;
 }
