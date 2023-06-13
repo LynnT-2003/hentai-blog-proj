@@ -27,7 +27,9 @@ export default function Post({
           </Link>
         </div>
         <div className="texts">
-          <h2>{title}</h2>
+          <Link to={"/post/id"}>
+            <h2>{title}</h2>
+          </Link>
           <p className="info">
             <a href="author" className="author">
               {author.username}
