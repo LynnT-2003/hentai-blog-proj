@@ -29,17 +29,24 @@ export default function Header() {
       <Link to="/" className="logo">
         WeebHive
       </Link>
-      <nav>
-        {username && (
+      <nav className="nav-container">
+        {username ? (
           <>
-            <Link to="/create">Create new post</Link>
-            <a onClick={logout}>Logout</a>
+            <Link to="/create" className="nav-link">
+              Create new post
+            </Link>
+            <a onClick={logout} className="nav-link">
+              Logout
+            </a>
           </>
-        )}
-        {!username && (
+        ) : (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <Link to="/login" className="nav-link">
+              Login
+            </Link>
+            <Link to="/register" className="nav-link">
+              Register
+            </Link>
           </>
         )}
       </nav>
