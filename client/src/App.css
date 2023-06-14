@@ -155,6 +155,12 @@ div.post-page a.edit-btn{
   text-decoration: none;
 }
 
+time{
+  margin-top: 0px !important;
+  margin-bottom: 0.2em !important;
+  color: #333
+}
+
 a svg{
   height:20px;
 }
